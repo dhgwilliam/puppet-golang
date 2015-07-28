@@ -7,13 +7,14 @@ class golang (
   $version             = $golang::params::version,
   $goroot              = $golang::params::goroot,
   $workdir             = $golang::params::workdir,
-    
+
 ) inherits golang::params {
 
 validate_re($::osfamily,
   '^(Debian|RedHat)$',
   'This module only works on Debian and Red Hat based systems.')
 validate_bool($manage_dependencies)
+validate_string($version)
 
 if $manage_dependencies {
     class {'golang::packages':}->
