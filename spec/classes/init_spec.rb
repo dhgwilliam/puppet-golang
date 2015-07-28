@@ -1,22 +1,15 @@
 require 'spec_helper'
-describe 'golang' do
 
-  let(:facts) { {:osfamily => 'RedHat', :environment => 'production'} }
+describe 'golang' do
+  let(:facts) { { osfamily: 'RedHat', environment: 'production' } }
 
   context 'with defaults for all parameters' do
     it { should contain_class('golang') }
-    
 
-  describe 'vcsrepo' do  
-  let(:params) {{
-            :name     => 'test',
-            :provider => "git",
-            :source   => "foo",
-            :revision => "master",
-        }}
-     end   
+    it do
+      should contain_vcsrepo('/usr/local/go').with(
+        'revision' => 'go1.4.2'
+      )
+    end
   end
 end
-
-
-
